@@ -41,10 +41,10 @@ jobs:
         go-version: '1.21.5'
       id: go
 
-    - name: Set up migrate
+    - name: Set up Migrate
       run: |
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
-        sudo mv migrate.linux-amd64 /usr/bin/
+        sudo mv migrate.linux-amd64 /usr/bin/migrate
         which migrate
 
     - name: Run migrations
