@@ -4,24 +4,28 @@ import (
 	"database/sql"
 	"log"
 
+	_ "github.com/lib/pq"
 	"github.com/manther/simplebank/api"
 	db "github.com/manther/simplebank/db/sqlc"
-	_ "github.com/lib/pq"
-)
-
-// TODO: Store in secret vault
-const (
-	dbDriver = "postgres"
-	dbSource = "postgresql://root:mysecretpassword@localhost:5432/simple_bank?sslmode=disable"
+	"github.com/manther/simplebank/db/util"
 )
 
 func main() {
-	conn, err := sql.Open(dbDriver, dbSource)
+	config, err := util.LoadConfig(".")
+	if err != nil {
+		log.Fatalf("cannot load config: %v", err)
+	}
+
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
 
 	store := db.NewStore(conn)
 	server := api.NewServer(store)
-	server.Start(":8080")
+
+	err = server.Start(config.ServerAddress)
+	if err != nil {
+		log.Fatalf("cannot start server at: %s, err: %v", config.ServerAddress, err)
+	}
 }
