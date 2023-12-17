@@ -33,4 +33,7 @@ migratedown:
 
 sqlc:
 	sqlc generate
-.PHONY: createdb migrateup migratedown sqlc test
+
+server:
+	go run main.go
+.PHONY: createdb migrateup migratedown sqlc test server
