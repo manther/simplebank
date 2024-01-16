@@ -36,4 +36,7 @@ sqlc:
 
 server:
 	go run main.go
-.PHONY: createdb migrateup migratedown sqlc test server
+
+mock: 
+	mockgen -package mockdb -destination db/mock/store.go github.com/manther/simplebank/db/sqlc Store 
+.PHONY: createdb migrateup migratedown sqlc test server mock cpuprof blockprof

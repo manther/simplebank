@@ -1,0 +1,23 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish
+        uses: ./.github/actions/publish
+        with:
+          registry: ${{ secrets.REGISTRY }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          image: ${{ secrets.IMAGE }}
+          tag: ${{ github.sha }}
+```
