@@ -25,10 +25,8 @@ func TestTransferTX(t *testing.T) {
 
 	existed := make(map[int]bool)
 	for i := 0; i < n; i++ {
-		txName := fmt.Sprintf("Tx%d", i)
 		go func() {
-			ctx := context.WithValue(context.Background(), txKey, txName)
-			result, err := store.TransferTX(ctx, TransferTxParms{
+			result, err := store.TransferTX(context.Background(), TransferTxParms{
 				FromAccountID: accnt1.ID,
 				ToAccountID:   accnt2.ID,
 				Amount:        amount,
