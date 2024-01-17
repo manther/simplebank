@@ -1,8 +1,8 @@
-name: Publish
+name: Deploy to ACR
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
