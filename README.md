@@ -25,3 +25,8 @@ Launching Postgrest container locally
 ```
 make postgres
 ```
+Preparing DB
+```
+make createdb
+make migrateup
+```
