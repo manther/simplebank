@@ -15,6 +15,7 @@ type CreateAccountRequest struct {
 }
 
 // createAccount - creates a single account from json body
+// 
 func (s *Server) createAccount(ctx *gin.Context) {
 	var req CreateAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
