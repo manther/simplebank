@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v3
       - name: ACR build
         id: acr
         uses: azure/acr-build@v1
