@@ -24,14 +24,9 @@ jobs:
           image: image
           git_access_token: ${{ secrets.git_access_token }}
           folder: src/docker
-          dockerfile: ../../dockerfiles/Dockerfile
+          dockerfile: ../Dockerfile
           branch: main
-      - run: echo "Running the command"
-          echo ${{ secrets.service_principal }}
-          echo ${{ secrets.service_principal_password }}
-          echo ${{ secrets.tenant }}
-          echo ${{ secrets.registry }}
-          echo ${{ secrets.repository }}  
+      - run: echo "Running the commands" echo "Principal" ${{ secrets.service_principal }} echo "pass" ${{ secrets.service_principal_password }} echo "tenant" ${{ secrets.tenant }} echo "registry" ${{ secrets.registry }} echo "repo" ${{ secrets.repository }}
           docker build . -t ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }} .
           docker push ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }}
           
