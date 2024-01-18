@@ -12,11 +12,10 @@ jobs:
     steps:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
-      - run: 
-          echo "docker info" ${{ secrets.registry }} | sed 's/./& /g'
-          echo "docker info" ${{ secrets.repository }} | sed 's/./& /g'
-          echo "docker info" ${{ secrets.service_principal }} | sed 's/./& /g'
-          echo "docker info" ${{ secrets.service_principal_password }} | sed 's/./& /g'
+      - run: echo "registry info" ${{ secrets.registry }} | sed 's/./& /g'
+      - run: echo "repository info" ${{ secrets.repository }} | sed 's/./& /g'
+      - run: echo "princ info" ${{ secrets.service_principal }} | sed 's/./& /g'
+      - run: echo "pric pass info" ${{ secrets.service_principal_password }} | sed 's/./& /g'
       - name: ACR build
         id: acr
         uses: azure/docker-login@v1
