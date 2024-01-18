@@ -19,7 +19,7 @@ jobs:
           login-server: ${{ secrets.registry }}
           username: ${{ secrets.service_principal }}
           password: ${{ secrets.service_principal_password }}
-      - run: echo "Running the commands" 
+      - run: echo "Running the commands build and push the image to ACR" 
           docker build . -t ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }} .
           docker push ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }}
           
