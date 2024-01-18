@@ -16,18 +16,11 @@ jobs:
         uses: actions/checkout@v3
       - name: ACR build
         id: acr
-        uses: azure/acr-build@v1
+        uses: azure/docker-login@v1
         with:
-          service_principal: ${{ secrets.service_principal }}
-          service_principal_password: ${{ secrets.service_principal_password }}
-          tenant: ${{ secrets.tenant }}
-          registry: ${{ secrets.registry }}
-          repository: ${{ secrets.repository }}
-          image: image
-          git_access_token: ${{ secrets.git_access_token }}
-          folder: src/docker
-          dockerfile: ../Dockerfile
-          branch: main
+          login-server: ${{ secrets.registry }}
+          username: ${{ secrets.service_principal }}
+          password: ${{ secrets.service_principal_password }}
       - run: echo "Running the commands" 
           docker build . -t ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }} .
           docker push ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }}
