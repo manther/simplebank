@@ -22,4 +22,3 @@ jobs:
       - run: echo "Running the commands build and push the image to ACR" 
           docker build . -t ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }} .
           docker push ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }}
-          
