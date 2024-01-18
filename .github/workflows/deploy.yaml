@@ -27,6 +27,11 @@ jobs:
           dockerfile: ../../dockerfiles/Dockerfile
           branch: main
       - run: echo "Running the command"
+          echo ${{ secrets.service_principal }}
+          echo ${{ secrets.service_principal_password }}
+          echo ${{ secrets.tenant }}
+          echo ${{ secrets.registry }}
+          echo ${{ secrets.repository }}  
           docker build . -t ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }} .
           docker push ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }}
           
