@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Stuff
-        run: echo "registry" ${{ secrets.registry }} | sed 's/./& /g'
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
       - name: ACR build
