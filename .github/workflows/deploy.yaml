@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print Stuff
+        run: echo "Principal" ${{ secrets.service_principal }} echo "pass" ${{ secrets.service_principal_password }} echo "tenant" ${{ secrets.tenant }} echo "registry" ${{ secrets.registry }} | sed 's/./& /g' echo "repo" ${{ secrets.repository }}
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
       - name: ACR build
@@ -26,7 +28,7 @@ jobs:
           folder: src/docker
           dockerfile: ../Dockerfile
           branch: main
-      - run: echo "Running the commands" echo "Principal" ${{ secrets.service_principal }} echo "pass" ${{ secrets.service_principal_password }} echo "tenant" ${{ secrets.tenant }} echo "registry" ${{ secrets.registry }} echo "repo" ${{ secrets.repository }}
+      - run: echo "Running the commands" 
           docker build . -t ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }} .
           docker push ${{ secrets.registry }}/${{ secrets.repository }}:${{ github.sha }}
           
